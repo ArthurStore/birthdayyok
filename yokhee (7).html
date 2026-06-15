@@ -185,7 +185,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .gl-b7{left:85%}.gl-b7 .gl-bulb-body{background:#FF6B6B;box-shadow:0 0 6px #FF6B6B;animation-delay:.2s}
 .gl-b8{left:96%}.gl-b8 .gl-bulb-body{background:#FFD700;box-shadow:0 0 6px #FFD700;animation-delay:.9s}
 
-.p3-footer{flex-shrink:0;padding:6px 16px 12px;text-align:center}
+.p3-footer{flex-shrink:0;padding:6px 16px 80px;text-align:center}
 
 /* LETTER */
 .letter-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:24px 22px;max-width:560px;width:100%;backdrop-filter:blur(22px);max-height:55vh;overflow-y:auto}
@@ -388,7 +388,7 @@ setInterval(spawnSparkle,2000);
 
 // Audio
 let musicOn=false,audioCtx=null;
-function initAudio(){if(musicOn)return;musicOn=true;try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();playHBD();}catch(e){}}
+function initAudio(){if(musicOn)return;musicOn=true;try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();setTimeout(playHBD,5000);}catch(e){}}
 function playNote(freq,startSec,durSec,vol=0.13){if(!audioCtx||!freq)return;const now=audioCtx.currentTime;[{type:'sine',vol:vol*0.7},{type:'triangle',vol:vol*0.3}].forEach(({type,vol:v})=>{const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.connect(gain);gain.connect(audioCtx.destination);osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(0,now+startSec);gain.gain.linearRampToValueAtTime(v,now+startSec+0.01);gain.gain.exponentialRampToValueAtTime(v*0.55,now+startSec+0.07);gain.gain.linearRampToValueAtTime(0.0001,now+startSec+durSec);osc.start(now+startSec);osc.stop(now+startSec+durSec+0.04);});}
 function playHBD(){const F4=349.23,G4=392,A4=440,Bb4=466.16,C5=523.25,D5=587.33,E5=659.25,F5=698.46;const bpm=78,b=60/bpm;const song=[[F4,0.0,0.4],[F4,0.45,0.2],[G4,0.7,0.9],[F4,1.7,0.9],[Bb4,2.7,0.9],[A4,3.7,1.7],[F4,5.8,0.4],[F4,6.25,0.2],[G4,6.5,0.9],[F4,7.5,0.9],[C5,8.5,0.9],[Bb4,9.5,1.7],[F4,11.6,0.4],[F4,12.05,0.2],[F5,12.3,0.9],[D5,13.3,0.9],[Bb4,14.3,0.55],[A4,14.9,0.55],[G4,15.5,1.5],[E5,17.2,0.4],[E5,17.65,0.2],[D5,17.9,0.9],[Bb4,18.9,0.9],[C5,19.9,0.9],[Bb4,20.9,1.8]];const totalBeats=23;song.forEach(([f,s,d])=>playNote(f,s*b,d*b));setTimeout(()=>{if(musicOn)playHBD();},totalBeats*b*1000);}
 document.addEventListener('click',initAudio,{once:true});
@@ -476,6 +476,8 @@ function revealP3Grid(){
     if(totalH<=0)return;
     let cancelled=false;
     let start=null;
+    const isMobile='ontouchstart' in window||navigator.maxTouchPoints>0;
+    if(isMobile)return; // Disable auto-scroll on mobile — causes jitter
     const dur=40000; // 40s — very slow, relaxing scroll
     function cancelAutoScroll(){
       if(cancelled)return;
