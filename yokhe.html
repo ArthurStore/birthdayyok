@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+w<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -266,8 +266,8 @@ canvas#cfcan{position:fixed;inset:0;z-index:800;pointer-events:none;display:none
 <!-- PAGE 2: CAKE — header stays on top, cake stays below -->
 <div class="page" id="page2">
   <div class="p2-header">
-    <div class="sec-lbl" style="justify-content:center">A Sweet Surprise For You</div>
-    <div class="main-title" style="font-size:clamp(1.2rem,3.5vw,2rem)">Happy Birthday, Yoan ✦</div>
+    <div class="sec-lbl" style="justify-content:center">A Small Surprise For You</div>
+    <div class="main-title" style="font-size:clamp(1.2rem,3.5vw,2rem)">Happy Birthday, Yokhe</div>
   </div>
   <div class="page2-content">
     <!-- Hanging string lights above cake -->
@@ -321,8 +321,8 @@ canvas#cfcan{position:fixed;inset:0;z-index:800;pointer-events:none;display:none
         <div class="ribbon-deco" style="grid-column:1/-1"></div>
         <!-- Title - centered full-width row -->
         <div class="p3-gap-title" style="grid-column:1/-1">
-          <div class="sec-lbl" style="justify-content:center">✦ Treasured Moments ✦</div>
-          <div class="main-title">It's Your Special Day ✦</div>
+          <div class="sec-lbl" style="justify-content:center">✦ Just Yokhe ✦</div>
+          <div class="main-title">It's Your Special Day</div>
           <div class="title-line"></div>
         </div>
         <!-- Ribbon decoration -->
@@ -349,12 +349,11 @@ canvas#cfcan{position:fixed;inset:0;z-index:800;pointer-events:none;display:none
 
 <!-- PAGE 4: LETTER -->
 <div class="page" id="page4">
-  <h1 class="main-title" style="margin-bottom:15px;font-size:clamp(1.5rem,4vw,2.3rem)">Happy Birthday, Yoan</h1>
+  <h1 class="main-title" style="margin-bottom:15px;font-size:clamp(1.5rem,4vw,2.3rem)">Happy Birthday, Yokhe</h1>
   <div class="letter-box" id="letterBox">
-    <div class="lt-title">For you ✦</div>
-    <div class="lt-sub" style="font-size:10px;margin-bottom:15px">A letter from the heart</div>
+    <div class="lt-title">A Letter from me</div>
     <div id="letter-text"></div>
-    <div class="lt-sig" id="lt-sig" style="display:none">With all my best wishes, always. ✦</div>
+    <div class="lt-sig" id="lt-sig" style="display:none">With all my best wishes, always</div>
   </div>
   <button class="btn" onclick="toPage(8)" style="margin-top:18px;display:none" id="btn-letter">Continue →</button>
 </div>
@@ -396,7 +395,7 @@ document.addEventListener('touchstart',initAudio,{once:true});
 
 // COUNTDOWN
 let targetReached=false, alarmInterval=null, timerFinished=false;
-let targetTime=new Date(2026,5,15,0,0,0,0); // 16 June 2026
+let targetTime=new Date(2026,5,16,0,0,0,0); // 16 June 2026
 const nextBtn=document.getElementById('nextBtn');
 const secondsBox=document.getElementById('secondsBox');
 const cdRow=document.getElementById('cdRow');
@@ -578,23 +577,21 @@ function openGift(){
 
 const LETTER_RAW=`Happy birthday **Yokhebed Yoan Yemima Da Costa**!
 
-Wish you all the best — panjang umur, sehat selalu, and may your life be filled with beautiful things you truly deserve. You've grown into someone truly amazing: strong, kind, and full of good energy.
+Wish you all the best panjang umur, sehat selalu, and may your life be filled with beautiful things you truly deserve.
 
-May all your dreams come true one by one, and may every step forward bring you closer to everything you've always dreamed of.
+Semoga apa yang kamu impikan bisa tercapai, and may every step forward bring you closer to everything you've always dreamed of.
 
-Good luck for your next journey in Jakarta! Keep succeeding, I know you're going to do great things. The city is lucky to have you.
+Good luck for your next journey in Jakarta! Semoga sukses terus di sana. The city is lucky to have you. Surabaya is gonna be so quiet after you leave :(( but I'm so excited to hear your stories there
 
-Thank you for being my friend — genuinely grateful to have you around. You make everything brighter just by being you.
+Thank you for being my friend, genuinely grateful to have you around. You make everything brighter just by being you.
 
-God bless you always, Yoan! May God always watch over you and bless you wherever you are.
-
-Happy birthday again! ✨`;
+God bless you always, Yokhe! `;
 
 function renderBold(text){return text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');}
 let letterInterval=null,letterBoxElement=null;
 function startLetter(){const el=document.getElementById('letter-text');el.innerHTML='';let idx=0;const plain=LETTER_RAW.replace(/\*\*(.*?)\*\*/g,'$1');let shown='';if(letterInterval)clearInterval(letterInterval);letterBoxElement=document.getElementById('letterBox');letterInterval=setInterval(()=>{if(idx>=plain.length){clearInterval(letterInterval);el.innerHTML=renderBold(LETTER_RAW).replace(/\n/g,'<br>');document.getElementById('lt-sig').style.display='block';document.getElementById('btn-letter').style.display='inline-flex';if(letterBoxElement)letterBoxElement.scrollTop=letterBoxElement.scrollHeight;return;}let ch=plain[idx];if(ch==='\n'){shown+='<br>';if(plain[idx+1]==='\n'){shown+='<br>';idx++;}}else{shown+=(ch==="'"?'&#39;':ch);}el.innerHTML=shown+'<span id="tw-cursor"></span>';idx++;if(letterBoxElement)letterBoxElement.scrollTop=letterBoxElement.scrollHeight;},22);}
 
-const FINAL_TEXTS=['Happy Birthday','With All My Heart','God Bless You Always','Stay Amazing'];
+const FINAL_TEXTS=['Happy Birthday, Yokhe!','Best Wishes For U','God Bless You Always','Stay Amazing','Stay Positive'];
 function startFinalTW(){const el=document.getElementById('tw-txt');let ti=0,ci=0,del=false;function type(){const ct=FINAL_TEXTS[ti];if(del){el.textContent=ct.substring(0,ci-1);ci--;}else{el.textContent=ct.substring(0,ci+1);ci++;}let spd=del?45:90;if(!del&&ci===ct.length){spd=1800;del=true;}else if(del&&ci===0){del=false;ti=(ti+1)%FINAL_TEXTS.length;spd=450;}setTimeout(type,spd);}type();}
 
 if(window.matchMedia('(hover:hover)').matches){let lastP=0;document.addEventListener('mousemove',e=>{const now=Date.now();if(now-lastP<55)return;lastP=now;for(let i=0;i<2;i++){const p=document.createElement('div');p.className='cp';const sz=2+Math.random()*5;const cols=['rgba(232,168,184,.85)','rgba(232,200,168,.7)','rgba(200,120,160,.8)'];p.style.cssText=`left:${e.clientX+(Math.random()-.5)*14}px;top:${e.clientY+(Math.random()-.5)*14}px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]}`;document.body.appendChild(p);setTimeout(()=>p.remove(),1000);}});}
@@ -621,7 +618,7 @@ function spawnPetals(){
 }
 spawnPetals();
 
-(function(){const stars=document.querySelectorAll('#rate-stars .star-r');const hint=document.getElementById('rate-hint');let locked=false;stars.forEach(star=>{star.addEventListener('mouseenter',()=>{if(locked)return;const v=parseInt(star.dataset.v);stars.forEach(s=>s.classList.toggle('hover',parseInt(s.dataset.v)<=v));});star.addEventListener('mouseleave',()=>{if(locked)return;stars.forEach(s=>s.classList.remove('hover'));});star.addEventListener('click',()=>{if(locked)return;locked=true;const v=parseInt(star.dataset.v);stars.forEach(s=>s.classList.toggle('active',parseInt(s.dataset.v)<=v));if(hint)hint.textContent=`Thanks for ${v}/10! Opening WhatsApp...`;const msg=encodeURIComponent(`✨ Birthday Gift Rating ✨\n\nRating: ${v}/10\nFor: Yokhebed Yoan Yemima Da Costa\n\nGenerated by arthurg.my.id/yokhe`);setTimeout(()=>{window.location.href='https://wa.me/62895349576090?text='+msg;},800);});star.addEventListener('touchend',(e)=>{e.preventDefault();star.click();});});})();
+(function(){const stars=document.querySelectorAll('#rate-stars .star-r');const hint=document.getElementById('rate-hint');let locked=false;stars.forEach(star=>{star.addEventListener('mouseenter',()=>{if(locked)return;const v=parseInt(star.dataset.v);stars.forEach(s=>s.classList.toggle('hover',parseInt(s.dataset.v)<=v));});star.addEventListener('mouseleave',()=>{if(locked)return;stars.forEach(s=>s.classList.remove('hover'));});star.addEventListener('click',()=>{if(locked)return;locked=true;const v=parseInt(star.dataset.v);stars.forEach(s=>s.classList.toggle('active',parseInt(s.dataset.v)<=v));if(hint)hint.textContent=`Thanks for ${v}/10! Opening WhatsApp...`;const msg=encodeURIComponent(`✨ Birthday Gift Rating ✨\n\nRating: ${v}/10\nFrom: Yokhebed Yoan Yemima Da Costa\n\nGenerated by arthurg.my.id/yokhe`);setTimeout(()=>{window.location.href='https://wa.me/6285102775181?text='+msg;},800);});star.addEventListener('touchend',(e)=>{e.preventDefault();star.click();});});})();
 </script>
 </body>
 </html>
